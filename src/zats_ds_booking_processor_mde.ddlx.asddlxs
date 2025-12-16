@@ -1,0 +1,61 @@
+@Metadata.layer: #CORE
+@UI.headerInfo:{
+    typeName: 'Booking',
+    typeNamePlural: 'Bookings',
+  title: {
+    value: 'BookingId',
+    type: #STANDARD
+  },
+  description: {
+    value: '_Customer.FirstName',
+    type: #STANDARD
+  }
+ }
+annotate view ZTS_DS_BOOKING_PROCESSOR
+    with 
+{
+   @UI.facet: [{ label:'Booking Info',
+                 type: #COLLECTION,
+                 purpose: #STANDARD,
+                 id: 'spiderman',
+                 position: 10 },
+                { label: 'Booking Details',
+                  type: #IDENTIFICATION_REFERENCE,
+                  purpose: #STANDARD,
+                  parentId: 'spiderman',
+                  position: 10},
+                 { label: 'Booking Suppl Details',
+                   type: #LINEITEM_REFERENCE,
+                   purpose: #STANDARD,
+                   position: 20,
+                   targetElement: '_BookingSupplement'}]
+//    TravelId;
+    @UI.lineItem: [{ position: 10 }]
+    @UI.identification: [{ position: 10 }]
+    BookingId;
+    @UI.lineItem: [{ position: 20 }]
+    @UI.identification: [{ position: 20 }]
+    BookingDate;
+    @UI.lineItem: [{ position: 30 }]
+    @UI.identification: [{ position: 30 }]
+    CustomerId;
+    @UI.lineItem: [{ position: 40 }]
+    CarrierId;
+//    ConnectionId;
+    @UI.lineItem: [{ position: 50 }]
+    FlightDate;
+    @UI.lineItem: [{ position: 60 }]
+    FlightPrice;
+//    CurrencyCode;
+    @UI.lineItem: [{ position: 70 }]
+    BookingStatus;
+//    LastChangedAt;
+    /* Associations */
+//    _BookingStatus;
+//    _BookingSupplement;
+//    _Carrier;
+//    _Connection;
+//    _Customer;
+//    _Travel_id;
+    
+}

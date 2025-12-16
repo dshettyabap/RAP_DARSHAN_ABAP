@@ -1,0 +1,111 @@
+@Metadata.layer: #CUSTOMER
+@UI.headerInfo:{
+    typeName: 'Travel',
+    typeNamePlural: 'Travels',
+  title: {
+    value: 'TravelId',
+    type: #STANDARD
+  },
+  description: {
+    value: '_Customer.FirstName',
+    type: #STANDARD
+  },
+  imageUrl: ''
+ }
+annotate view ZATS_DS_TRAVEL_PROCESSOR with
+{
+  @UI.facet: [{
+                purpose: #HEADER,
+                type: #DATAPOINT_REFERENCE,
+                position: 10 ,
+                targetQualifier: 'Price_data'},
+                {
+                purpose: #HEADER,
+                type: #DATAPOINT_REFERENCE,
+                position: 20 ,
+                targetQualifier: 'Status'},
+                  {
+                label: 'General Info',
+                type: #COLLECTION,
+                purpose: #STANDARD,
+                position: 10,
+                id: 'Super'
+              },
+                {
+                label: 'items',
+                type: #COLLECTION,
+                purpose: #STANDARD,
+                position: 20,
+                id: 'Spider'
+              },
+             {                 label: 'More Info',
+                type: #IDENTIFICATION_REFERENCE,
+                purpose: #STANDARD,
+                position: 10,
+                parentId:  'Super' },
+                {                 label: 'Money Info',
+                type: #FIELDGROUP_REFERENCE,
+                purpose: #STANDARD,
+                position: 20,
+                targetQualifier: 'Pricing',
+                parentId:  'Super' } ,
+                {                 label: 'Date Info',
+                type: #FIELDGROUP_REFERENCE,
+                purpose: #STANDARD,
+                position: 30,
+                targetQualifier: 'Date',
+                parentId:  'Super' } ,
+                { label: 'Admin Info',
+                  type:#FIELDGROUP_REFERENCE,
+                  purpose: #STANDARD,
+                  position: 40,
+                  targetQualifier: 'Admin',
+                  parentId: 'Super' },
+                  { label: 'Booking',
+                    type: #LINEITEM_REFERENCE,
+                    purpose: #STANDARD,
+                    position: 20,
+                    targetElement: '_Booking'}
+                ]
+  @UI.selectionField: [{ position: 10 }]
+  @UI.lineItem: [{ position: 10 } , { label: 'Copy Travel' , 
+                   type: #FOR_ACTION , dataAction: 'copyTravel'}]
+  @UI.identification: [{ position: 10 } ]
+  TravelId;
+  @UI.selectionField: [{ position: 20 }]
+  @UI.lineItem: [{ position: 20 }]
+  @UI.identification: [{ position: 20 }]
+  AgencyId;
+  @UI.selectionField: [{ position: 30 }]
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 30 }]
+  CustomerId;
+  @UI.lineItem: [{ position: 40 }]
+  @UI.fieldGroup: [{ qualifier: 'Date' , position: 10 }]
+  BeginDate;
+  //EndDate;
+  @UI.fieldGroup: [{  qualifier: 'Pricing' , position: 20 }]
+  BookingFee;
+  @UI.selectionField: [{ position: 40 }]
+  @UI.lineItem: [{ position: 50 }]
+  @UI.dataPoint: { qualifier: 'Price_data' , title: 'Flight Price' }
+  @UI.fieldGroup: [{  qualifier: 'Pricing' , position: 20 }]
+  TotalPrice;
+  //CurrencyCode;
+  //    Description;
+  @UI.selectionField: [{ position: 50 }]
+  @UI.lineItem: [{ position: 70 , criticality: 'Criticality',
+                   importance: #HIGH}]
+  @UI.dataPoint: { qualifier: 'Status' , title: 'Overal Status' , criticality: 'Criticality'}
+  @UI.fieldGroup: [{  qualifier: 'Pricing' , position: 30 }]
+  OverallStatus;
+  @UI.fieldGroup: [{ qualifier: 'Admin' , label: 'Created By' , position :10  }]
+  CreatedBy;
+  @UI.fieldGroup: [{ qualifier: 'Admin' , label: 'Created At' , position :20  }]
+  CreatedAt;
+  @UI.fieldGroup: [{ qualifier: 'Admin' , label: 'Last Changed By' , position :30  }]
+  LastChangedBy;
+  @UI.fieldGroup: [{ qualifier: 'Admin' , label: 'Last Changed At' , position :40  }]
+  LastChangedAt;
+
+}
